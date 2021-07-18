@@ -26,3 +26,7 @@ def create_email_table():
 
 def end_db_operations():
     db_connector_factory.close_connection()
+
+def insert_records(mail_id, subject, from_add, epoch):
+    print(mail_id, subject, from_add, epoch)
+    pass

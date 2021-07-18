@@ -2,9 +2,12 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 import base64
-from email_ops.get_mail_utils import convert_datetime_to_utc, end_db_operations, create_email_table
-
-
+from email_ops.get_mail_utils import (
+    convert_datetime_to_utc,
+    end_db_operations,
+    create_email_table,
+    insert_records,
+)
 
 
 def get_emails(user_app_token, app_credentials, SCOPES):
@@ -43,10 +46,10 @@ def get_emails(user_app_token, app_credentials, SCOPES):
                 if header["name"] == "Subject":
                     subject = header["value"]
                 if header["name"] == "From":
-                    from_ad = header["value"]
+                    from_add = header["value"]
                 if header["name"] == "Date":
-                    date = convert_datetime_to_utc(header["value"])
-            
-            print(mail_id, subject, from_ad, date)
+                    epoch = convert_datetime_to_utc(header["value"])
+
+            insert_records(mail_id, subject, from_add, epoch)
 
         end_db_operations()
