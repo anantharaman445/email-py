@@ -7,23 +7,20 @@ from email_ops.get_mail_utils import (
     insert_records,
 )
 
-from email_ops.google_client_services import get_user_email_service , get_message_by_id
+from email_ops.google_client_services import get_user_email_service , get_message_by_id, get_inbox_emails
 
 def get_emails(user_app_token, maxResults):
 
     service = get_user_email_service(user_app_token)
 
     # Call the Gmail API to fetch INBOX
-    results = (
-        service.users()
-        .messages()
-        .list(userId="me", labelIds=["INBOX"], maxResults=maxResults)
-        .execute()
-    )
+    results = get_inbox_emails(maxResults, service)
+
     messages = results.get("messages", [])
 
     # create / check if the table exists
     create_email_table()
+    
     for message in messages:
         msg = get_message_by_id(service, message["id"])
         payload = msg["payload"]

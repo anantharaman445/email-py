@@ -20,7 +20,14 @@ def get_user_email_service(user_app_token):
     service = build("gmail", "v1", http=creds.authorize(Http()))
     return service
 
-
+def get_inbox_emails(maxResults, email_service):
+    results = (
+        email_service.users().messages()
+        .list(userId="me", labelIds=["INBOX"], maxResults=maxResults)
+        .execute()
+        )
+    return results
+    
 def get_message_by_id(email_service, email_message_id):
     msg = (
         email_service.users().messages().get(userId="me", id=email_message_id).execute()
