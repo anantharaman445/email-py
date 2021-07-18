@@ -1,23 +1,17 @@
-from googleapiclient.discovery import build
-from httplib2 import Http
-from oauth2client import file, client, tools
+
 import base64
 from email_ops.get_mail_utils import (
     convert_datetime_to_utc,
     end_db_operations,
     create_email_table,
     insert_records,
+    get_email_service
 )
 
 
-def get_emails(user_app_token, app_credentials, SCOPES, maxResults):
+def get_emails(user_app_token, maxResults):
 
-    store = file.Storage(user_app_token)
-    creds = store.get()
-    if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets(app_credentials, SCOPES)
-        creds = tools.run_flow(flow, store)
-    service = build("gmail", "v1", http=creds.authorize(Http()))
+    service = get_email_service(user_app_token)
 
     # Call the Gmail API to fetch INBOX
     results = (

@@ -1,13 +1,29 @@
-
 from datetime import datetime
 from dateutil import parser as date_parser
 from datetime import timezone
 from db_utils.db_connector import db_connector_factory
+from googleapiclient.discovery import build
+from httplib2 import Http
+from oauth2client import file, client, tools
+
 
 app_credentials = "./auth/credentials.json"
-user_app_token = "./user_token/token.json"
-scopes = "https://www.googleapis.com/auth/gmail.readonly"
 
+
+scopes = [
+    "https://www.googleapis.com/auth/gmail.readonly",
+    "https://www.googleapis.com/auth/gmail.modify",
+]
+
+
+def get_email_service(user_app_token):
+    store = file.Storage(user_app_token)
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets(app_credentials, scopes)
+        creds = tools.run_flow(flow, store)
+    service = build("gmail", "v1", http=creds.authorize(Http()))
+    return service
 
 
 def convert_datetime_to_utc(date_time_str):
@@ -24,9 +40,15 @@ def convert_datetime_to_utc(date_time_str):
 def create_email_table():
     db_connector_factory.create_emails_table()
 
+
 def end_db_operations():
     db_connector_factory.close_connection()
 
+
 def insert_records(mail_id, subject, from_add, epoch):
     db_connector_factory.insert_email_records(mail_id, subject, from_add, epoch)
-    
+
+
+# service.users().messages().modify(userId='me', id=message['id'], body={
+#     'removeLabelIds': ['UNREAD']
+# }).execute()
