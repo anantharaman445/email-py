@@ -10,6 +10,12 @@ from email_ops.get_mail_utils import (
 from email_ops.google_client_services import get_user_email_service , get_message_by_id, get_inbox_emails
 
 def get_emails(user_app_token, maxResults):
+    """
+    This function does 
+    1. get the auth service from google api
+    2. get the emails based on the user's auth
+    3. push each row to the db(before the upsert function will create table emails if it is not there)
+    """
 
     service = get_user_email_service(user_app_token)
 
