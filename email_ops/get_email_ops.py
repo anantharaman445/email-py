@@ -10,7 +10,7 @@ from email_ops.get_mail_utils import (
 )
 
 
-def get_emails(user_app_token, app_credentials, SCOPES):
+def get_emails(user_app_token, app_credentials, SCOPES, maxResults):
 
     store = file.Storage(user_app_token)
     creds = store.get()
@@ -23,7 +23,7 @@ def get_emails(user_app_token, app_credentials, SCOPES):
     results = (
         service.users()
         .messages()
-        .list(userId="me", labelIds=["INBOX"], maxResults=1)
+        .list(userId="me", labelIds=["INBOX"], maxResults=maxResults)
         .execute()
     )
     messages = results.get("messages", [])
