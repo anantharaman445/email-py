@@ -16,13 +16,6 @@ def insert_records(mail_id, subject, from_add, epoch):
     db_connector_factory.insert_email_records(mail_id, subject, from_add, epoch)
 
 
-def get_message_by_id(email_service, email_message_id):
-    msg = (
-        email_service.users().messages().get(userId="me", id=email_message_id).execute()
-    )
-    return msg
-
-
 def convert_datetime_to_utc(date_time_str):
     """
     input (str)    : Sun, 18 Jul 2021 15:36:29 +0530 (IST)
