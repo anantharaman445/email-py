@@ -4,10 +4,6 @@ from datetime import timezone
 from db_utils.db_connector import db_connector_factory
 
 
-def get_user_email_service(user_app_token):
-    return get_user_email_service(user_app_token)
-
-
 def create_email_table():
     db_connector_factory.create_emails_table()
 
