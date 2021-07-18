@@ -49,6 +49,19 @@ def insert_records(mail_id, subject, from_add, epoch):
     db_connector_factory.insert_email_records(mail_id, subject, from_add, epoch)
 
 
-# service.users().messages().modify(userId='me', id=message['id'], body={
-#     'removeLabelIds': ['UNREAD']
-# }).execute()
+def mark_email_unread(email_service, email_message_id):
+    modified_msg = (
+        email_service.users()
+        .messages()
+        .modify(userId="me", id=email_message_id, body={"removeLabelIds": ["UNREAD"]})
+        .execute()
+    )
+
+    return modified_msg
+
+
+def get_message_by_id(email_service, email_message_id):
+    msg = (
+        email_service.users().messages().get(userId="me", id=email_message_id).execute()
+    )
+    return msg
