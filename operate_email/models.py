@@ -1,15 +1,15 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, Integer, String, Float, Text, MetaData, Table
-Base=declarative_base()
-DB_URI = 'postgresql+psycopg2://ananth:ananth@localhost/ananth_test2'
-engine = create_engine(DB_URI, echo=True)
+from flask import Flask
+from flask import request,redirect,render_template
+from flask_sqlalchemy import SQLAlchemy
 
-metadata = MetaData()
+app=Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://ananth:ananth@localhost/ananth_test2'
+db=SQLAlchemy(app)
 
-emails = Table('emails', metadata,
-   Column('mail_id', Text, primary_key=True),
-   Column('subject', Text),
-   Column('from_add', Text),
-   Column('epoch', Float)
-)
 
+class Emails(db.Model):
+    
+    mail_id = db.Column(db.Text, primary_key=True)
+    subject = db.Column(db.Text)
+    from_add = db.Column(db.Text)
+    epoch = db.Column(db.Float)
