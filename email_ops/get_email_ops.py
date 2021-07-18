@@ -2,8 +2,8 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 import base64
-from email_ops.get_mail_utils import convert_datetime_to_utc
-#  from get_email.get_mail_utils import user_app_token, app_credentials, scopes, convert_datetime_to_utc
+from email_ops.get_mail_utils import convert_datetime_to_utc, end_db_operations, create_email_table
+
 
 
 
@@ -29,7 +29,7 @@ def get_emails(user_app_token, app_credentials, SCOPES):
         pass
         print("No messages found.")
     else:
-
+        create_email_table()
         for message in messages:
             msg = (
                 service.users().messages().get(userId="me", id=message["id"]).execute()
@@ -47,6 +47,6 @@ def get_emails(user_app_token, app_credentials, SCOPES):
                 if header["name"] == "Date":
                     date = convert_datetime_to_utc(header["value"])
             
-            print(subject, from_ad, date)
+            print(mail_id, subject, from_ad, date)
 
-
+        end_db_operations()

@@ -19,3 +19,10 @@ def convert_datetime_to_utc(date_time_str):
     utc_time = date_time.replace(tzinfo=timezone.utc)
     utc_timestamp_epoch = utc_time.timestamp()
     return utc_timestamp_epoch
+
+
+def create_email_table():
+    db_connector_factory.create_emails_table()
+
+def end_db_operations():
+    db_connector_factory.close_connection()
