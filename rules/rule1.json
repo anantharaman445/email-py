@@ -1,3 +1,16 @@
 {
-    
+    "Rule1" : {
+        "all" : {
+            "fields" : ["from_add", "subject" , "epoch"],
+            "predicate" : ["contains", "not equals", "less than"],
+            "actions" : ["mark_read", "mark_unread", "move"]
+
+        }, 
+        "any" :{
+            "fields" : ["from_add", "subject" , "epoch"],
+            "predicate" : ["contains", "not equals", "less than"],
+            "actions" : ["mark_read", "mark_unread", "move"]
+
+        }
+    }
 }
