@@ -1,4 +1,6 @@
 import psycopg2
+from operate_email.models import  emails, engine
+from sqlalchemy.sql import select
 
 
 class DbConnector:
@@ -51,5 +53,16 @@ class DbConnector:
             print(e)
             
 
+class ModelConnector:
+    def __init__(self):
+        self.conn = engine.connect()
+
+    
+    def get_emails(self, subject):
+        query = select(emails).where(emails.c.subject == subject)
+        #  result = conn.execute(s) statement.where(users.c.name.like('%ed%'))
+        result = self.conn.execute(query)
+        return result
 
 db_connector_factory = DbConnector()
+model_connector_factory = ModelConnector()
