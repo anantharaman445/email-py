@@ -8,11 +8,11 @@ from operate_email.models import *
 
 @app.route('/filteremails',methods=['PUT'])
 def Categoryform():
-    if request.method=='PUT':
-        search = "%{}%".format("Security alert")
-        emails = Emails.query.filter(Emails.subject.like(search)).all()
-        for row in emails:
-            print(row.mail_id)
+    # if request.method=='PUT':
+        # search = "%{}%".format("Security alert")
+        # emails = Emails.query.filter(Emails.subject.like(search)).all()
+        # for row in emails:
+        #     print(row.mail_id)
        
     return {}
 
