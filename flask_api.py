@@ -7,7 +7,7 @@ from operate_email.models import *
 
 
 @app.route('/filteremails',methods=['PUT'])
-def Categoryform():
+def filterEmails():
     # if request.method=='PUT':
         # search = "%{}%".format("Security alert")
         # emails = Emails.query.filter(Emails.subject.like(search)).all()

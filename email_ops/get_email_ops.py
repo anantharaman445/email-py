@@ -5,14 +5,13 @@ from email_ops.get_mail_utils import (
     end_db_operations,
     create_email_table,
     insert_records,
-    get_email_service,
-    get_message_by_id,
 )
 
+from email_ops.google_client_services import get_user_email_service , get_message_by_id
 
 def get_emails(user_app_token, maxResults):
 
-    service = get_email_service(user_app_token)
+    service = get_user_email_service(user_app_token)
 
     # Call the Gmail API to fetch INBOX
     results = (
