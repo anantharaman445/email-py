@@ -50,5 +50,3 @@ def get_emails(user_app_token, app_credentials, SCOPES):
             print(subject, from_ad, date)
 
 
-# if __name__ == "__main__":
-#     main(user_app_token, app_credentials, scopes)

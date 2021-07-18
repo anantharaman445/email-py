@@ -2,7 +2,7 @@
 from datetime import datetime
 from dateutil import parser as date_parser
 from datetime import timezone
-import db_utils
+from db_utils.db_connector import db_connector_factory
 
 app_credentials = "./auth/credentials.json"
 user_app_token = "./user_token/token.json"
