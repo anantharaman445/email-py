@@ -100,7 +100,7 @@ def modify_email(rule):
 
 
 if __name__ == '__main__':
-    # rule_no = sys.argv[1]
-    # rule_no = "Rule" + rule_no
-    modify_email("Rule1")
+    rule_no = sys.argv[1]
+    rule_no = "Rule" + rule_no
+    modify_email(rule_no)
     
