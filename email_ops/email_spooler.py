@@ -40,7 +40,6 @@ def get_emails(user_app_token, maxResults):
                 value = header["value"].split()
                 from_add = value[-1]
                 value.remove(value[-1])
-                print(value)
                 from_name = " ".join(value)
             if header["name"] == "Date":
                 epoch = convert_datetime_to_utc(header["value"])

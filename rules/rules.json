@@ -2,16 +2,39 @@
     "Rule1" : {
         "all" : [
             {
-                "field" : "from_add",
+                "field" : "from_address",
                 "predicate" : "contains",
-                "value" : "smtpmailbox.com"
+                "value" : "info@guvi.in"
+            },
+            {
+                "field" : "subject",
+                "predicate" : "contains",
+                "value" : "Offering Placement"
+            },
+            {
+                "field" : "epoch",
+                "predicate" : "less than",
+                "value" : "2 days"
             }
-        ],
-        "any" :{
-            "fields" : ["from_add", "subject" , "epoch"],
-            "predicate" : ["contains", "not equals", "less than"],
-            "actions" : ["mark_read", "mark_unread", "move"]
-
-        }
+        ]
+    },
+    "Rule2" : {
+        "any" : [
+            {
+                "field" : "from_address",
+                "predicate" : "contains",
+                "value" : "info@guvi.in"
+            },
+            {
+                "field" : "subject",
+                "predicate" : "contains",
+                "value" : "Offering Placement"
+            },
+            {
+                "field" : "epoch",
+                "predicate" : "less than",
+                "value" : "2 days"
+            }
+        ]
     }
 }
