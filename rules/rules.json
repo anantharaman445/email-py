@@ -1,6 +1,6 @@
 {
     "Rule1": {
-        "prperties": [
+        "properties": [
             {
                 "field": "from_address",
                 "predicate": "contains",
@@ -24,7 +24,7 @@
         }
     },
     "Rule2": {
-        "prperties": [
+        "properties": [
             {
                 "field": "from_address",
                 "predicate": "contains",
