@@ -1,36 +1,36 @@
 import json
 from db_utils.db_connector import db_connector_factory
-from email_ops.google_client_services import get_user_email_service, remove_labels, add_labels
+from email_ops.google_client_services import (
+    get_user_email_service,
+    remove_labels,
+    add_labels,
+)
 from email_ops.get_mail_utils import get_time_delta_days
 import sys
 from operate_email.query_generator import operator_map, rules, get_records_all
 
 
-
-
 def get_rule(rule_no):
     return rules[rule_no]
 
+
 def parse_rule(rule):
-    """
-    {
-        "subject" : ["contains" , "offering placement"]
-    }
-    """
+    
     rule = get_rule(rule)
-   
+
     properties = rule["properties"]
     predicate = rule["predicate"]
     action = rule["action"]
     prop_dict = {}
     for prop in properties:
-        
+
         prop_dict[prop["field"]] = []
-        
+
         prop_dict[prop["field"]].append(prop["predicate"])
         prop_dict[prop["field"]].append(prop["value"])
-        
+
     return prop_dict, predicate, action
+
 
 def get_props(rule):
     """
@@ -46,18 +46,19 @@ def get_props(rule):
         days = int(epoch_split[0]) * 30
     else:
         days = int(epoch_split[0])
-    
+
     if epoch[0] == "less than":
-        days = days*(-1)
+        days = days * (-1)
         epoch_start, epoch_end = get_time_delta_days(days)
     else:
         epoch_start, epoch_end = get_time_delta_days(days)
     res = dict(subject=subject, from_address=from_address, epoch=epoch_start)
     return res, predicate, action
 
+
 def modify_email(rule):
     res_dict, predicate, action = get_props(rule)
-    if predicate == "all" :
+    if predicate == "all":
         rows = get_records_all(res_dict)
     elif predicate == "any":
         rows = []
@@ -70,9 +71,7 @@ def modify_email(rule):
             add_labels(email_service, row.mail_id)
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     rule_no = sys.argv[1]
     rule_no = "Rule" + rule_no
     modify_email(rule_no)
-    
