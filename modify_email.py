@@ -7,7 +7,7 @@ from email_ops.google_client_services import (
 )
 from email_ops.get_mail_utils import get_time_delta_days
 import sys
-from operate_email.query_generator import operator_map, rules, get_records_all
+from operate_email.query_generator import operator_map, rules, get_records_all, get_records_any
 
 
 def get_rule(rule_no):
@@ -15,7 +15,7 @@ def get_rule(rule_no):
 
 
 def parse_rule(rule):
-    
+
     rule = get_rule(rule)
 
     properties = rule["properties"]
@@ -58,12 +58,16 @@ def get_props(rule):
 
 def modify_email(rule):
     res_dict, predicate, action = get_props(rule)
+    
     if predicate == "all":
         rows = get_records_all(res_dict)
     elif predicate == "any":
-        rows = []
+        rows = get_records_any(res_dict)
+    
     user_app_token = "./user_token/token.json"
+    
     email_service = get_user_email_service(user_app_token)
+    
     for row in rows:
         if action["mark_as"] == "read":
             remove_labels(email_service, row.mail_id)
