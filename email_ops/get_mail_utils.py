@@ -26,12 +26,12 @@ def convert_datetime_to_utc(date_time_str):
     utc_timestamp_epoch = utc_time.timestamp()
     return utc_timestamp_epoch
 
-# def get_time_delta_days(no_of_days=-1):
-#     start_date_time = datetime.now()
-#     end_date_time = (start_date_time + timedelta(days=no_of_days))
-#     start_epoch = start_date_time.replace(tzinfo=timezone.utc).timestamp()
-#     end_epoch = end_date_time.replace(tzinfo=timezone.utc).timestamp()
-#     return start_epoch, end_epoch
+def get_time_delta_days(no_of_days=-1):
+    start_date_time = datetime.now()
+    end_date_time = (start_date_time + timedelta(days=no_of_days))
+    start_epoch = start_date_time.replace(tzinfo=timezone.utc).timestamp()
+    end_epoch = end_date_time.replace(tzinfo=timezone.utc).timestamp()
+    return start_epoch, end_epoch
 
 
 
