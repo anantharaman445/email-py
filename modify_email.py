@@ -1,5 +1,4 @@
 import json
-from db_utils.db_connector import db_connector_factory
 from email_ops.google_client_services import (
     get_user_email_service,
     remove_labels,
