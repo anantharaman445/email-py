@@ -13,3 +13,4 @@ class Emails(db.Model):
     subject = db.Column(db.Text)
     from_add = db.Column(db.Text)
     epoch = db.Column(db.Float)
+    from_name = db.Column(db.Text)

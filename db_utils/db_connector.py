@@ -22,7 +22,8 @@ class DbConnector:
                 """CREATE TABLE IF NOT EXISTS EMAILS
                                 (MAIL_ID TEXT PRIMARY KEY     NOT NULL,
                                 SUBJECT           TEXT    NOT NULL,
-                                FROM_ADD            TEXT     NOT NULL,
+                                FROM_ADDRESS       TEXT     NOT NULL,
+                                FROM_NAME               TEXT     NOT NULL,
                                 EPOCH        FLOAT);"""
             )
             self.con.commit()
@@ -33,16 +34,17 @@ class DbConnector:
                 """CREATE TABLE IF NOT EXISTS EMAILS
                                 (MAIL_ID TEXT PRIMARY KEY     NOT NULL,
                                 SUBJECT           TEXT    NOT NULL,
-                                FROM_ADD            TEXT     NOT NULL,
+                                FROM_ADDRESS      TEXT     NOT NULL,
+                                FROM_NAME               TEXT     NOT NULL,
                                 EPOCH        FLOAT);"""
             )
             self.con.commit()
         print("Table verified/created successfully")
 
-    def insert_email_records(self, mail_id, subject, from_add, epoch):
+    def insert_email_records(self, mail_id, subject, from_add, from_name, epoch):
         try:
-            insert_str = "INSERT INTO EMAILS(MAIL_ID,SUBJECT,FROM_ADD,EPOCH) VALUES ('{}' , '{}', '{}' , '{}') ON CONFLICT (mail_id) DO NOTHING".format(
-                    mail_id, subject, from_add, epoch
+            insert_str = "INSERT INTO EMAILS(MAIL_ID,SUBJECT,FROM_ADD, FROM_NAME,EPOCH) VALUES ('{}' , '{}', '{}' , '{}' , '{}') ON CONFLICT (mail_id) DO NOTHING".format(
+                    mail_id, subject, from_add, from_name, epoch
                 )
             self.cur.execute(insert_str)
             self.con.commit()
