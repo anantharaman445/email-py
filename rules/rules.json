@@ -1,51 +1,50 @@
 {
     "Rule1": {
-        "predicate": {
-            "all": [
-                {
-                    "field": "from_address",
-                    "predicate": "contains",
-                    "value": "info@guvi.in"
-                },
-                {
-                    "field": "subject",
-                    "predicate": "contains",
-                    "value": "Offering Placement"
-                },
-                {
-                    "field": "epoch",
-                    "predicate": "less than",
-                    "value": "2 days"
-                }
-            ]
-        },
+        "prperties": [
+            {
+                "field": "from_address",
+                "predicate": "contains",
+                "value": "info@guvi.in"
+            },
+            {
+                "field": "subject",
+                "predicate": "contains",
+                "value": "Offering Placement"
+            },
+            {
+                "field": "epoch",
+                "predicate": "less than",
+                "value": "2 days"
+            }
+        ],
+        "predicate": "all",
         "action": {
             "move_message": "inbox",
             "mark_as": "read"
         }
     },
     "Rule2": {
-        "predicate": {
-            "any": [
-                {
-                    "field": "from_address",
-                    "predicate": "contains",
-                    "value": "info@guvi.in"
-                },
-                {
-                    "field": "subject",
-                    "predicate": "contains",
-                    "value": "Offering Placement"
-                },
-                {
-                    "field": "epoch",
-                    "predicate": "less than",
-                    "value": "2 days"
-                }
-            ]
-        },
+        "prperties": [
+            {
+                "field": "from_address",
+                "predicate": "contains",
+                "value": "info@guvi.in"
+            },
+            {
+                "field": "subject",
+                "predicate": "contains",
+                "value": "Offering Placement"
+            },
+            {
+                "field": "epoch",
+                "predicate": "less than",
+                "value": "2 days"
+            }
+        ],
+        "predicate": "any",
         "action": {
             "move_message": "inbox",
             "mark_as": "read"
         }
     }
+}
