@@ -12,8 +12,8 @@ def end_db_operations():
     db_connector_factory.close_connection()
 
 
-def insert_records(mail_id, subject, from_add, epoch):
-    db_connector_factory.insert_email_records(mail_id, subject, from_add, epoch)
+def insert_records(mail_id, subject, from_add, from_name, epoch):
+    db_connector_factory.insert_email_records(mail_id, subject, from_add, from_name, epoch)
 
 
 def convert_datetime_to_utc(date_time_str):

@@ -37,10 +37,14 @@ def get_emails(user_app_token, maxResults):
             if header["name"] == "Subject":
                 subject = header["value"]
             if header["name"] == "From":
-                from_add = header["value"]
+                value = header["value"].split()
+                from_add = value[-1]
+                value.remove(value[-1])
+                print(value)
+                from_name = " ".join(value)
             if header["name"] == "Date":
                 epoch = convert_datetime_to_utc(header["value"])
 
-        insert_records(mail_id, subject, from_add, epoch)
+        insert_records(mail_id, subject, from_add, from_name, epoch)
 
     end_db_operations()

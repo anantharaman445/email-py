@@ -43,7 +43,7 @@ class DbConnector:
 
     def insert_email_records(self, mail_id, subject, from_add, from_name, epoch):
         try:
-            insert_str = "INSERT INTO EMAILS(MAIL_ID,SUBJECT,FROM_ADD, FROM_NAME,EPOCH) VALUES ('{}' , '{}', '{}' , '{}' , '{}') ON CONFLICT (mail_id) DO NOTHING".format(
+            insert_str = "INSERT INTO EMAILS(MAIL_ID,SUBJECT,FROM_ADDRESS, FROM_NAME,EPOCH) VALUES ('{}' , '{}', '{}' , '{}' , '{}') ON CONFLICT (mail_id) DO NOTHING".format(
                     mail_id, subject, from_add, from_name, epoch
                 )
             self.cur.execute(insert_str)
